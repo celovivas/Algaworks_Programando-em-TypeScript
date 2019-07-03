@@ -1,0 +1,120 @@
+-------------------------------------
+Algaworks - Programando em Typescript
+-------------------------------------
+
+Site: www.typescriptlang.org
+
+
+- Requisitos
+- Instalar o Node.js e NPM
+- Instalar o typescript
+	- Comando: choco install -g typescript
+	- Para atualizar: choco upgrade -g typescript
+
+node -v
+npm -v
+tsc -v
+
+Extensões sugeridas no vscode
+- Angular v4 TypeScript Snippets
+- vscode-icons
+
+
+------------------------------------
+no prompt, se quiser testar o node
+------------------------------------
+
+- digitar o comando: node
+- vai entrar no modo interativo do node
+- a partir daí podemos digitar qualquer código javascript que funciona
+
+
+
+O TypeScript pode usar uma tipagem estática
+EX.: Podemos forçar uma tipagem de string ou podemos deixar sem tipagem nenhuma, usando o any
+	function dizerOla(nome: string){}
+	function dizerOla(nome: any){}
+
+-----------------------------------------	
+Para compilar um arquivo typescript (.ts)
+-----------------------------------------	
+- Abrir a pasta onde o arquivo .ts se encontra;
+- Rodar o comando tsc <nome do arquivo.ts>
+	Ex.: tsc helloworld.ts
+- O comando acima vai compilar e gerar um arquivo javascript (.js)	
+- Para executar o arquivo .js
+	- Comando: node <nome_do_arquivo>.js
+	- Ex.: node helloworld.js
+
+	
+	
+-----------------------------------	
+Criação do arquivo tsconfig.json	
+-----------------------------------	
+Quando criamos este arquivo, o vscode entende que aquela pasta é um projeto do tipo typescript
+Neste arquivo colocamos configurações do projeto, como compilação, etc
+
+---------------------------------------------
+Para criar uma configuração de con automática
+---------------------------------------------
+ctrl + shift + P
+Procurar por: Configure task
+Clicar nele
+Vai aparecer uma tela para pesquisar
+Procurar por: tsc: watch -tsconfig.json
+Ao clicar, vai criar uma pasta .vscode com um arquivo json lá dentro. Não precisamos editá-lo
+
+-- Para executar, clicar em F1, e procurar por run build task (Ou ctrl + shift + B)
+
+------------------------
+Declarações de variáveis
+------------------------
+// var, let e const
+
+---
+var
+---
+- Toda declaração deste tipo, ocorre o hoisting, ou seja, a declaração da variável sobe para o início do escopp (Function) ou arquivo;
+- Ou seja, ocupa memória e se não receber valor, fica declarada como undefined.
+
+-----
+let
+-----
+- A variável só vive realmente no escopo que ela foi declarada.
+- Usar sempre que possível o let
+
+------
+const
+------
+- É uma constante. Funciona como um let, porém não podemos mudar o valor da sua variavel
+
+
+-------------------------------------
+Inferencia de tipos
+-------------------------------------
+- Capacidade do typescript de tentar identificar o tipo de variável mesmo que vc não escreva o tipo dela
+EX.: 
+	let quantidade = 20;
+	após esta declaração, não conesguimos colocar uma string nesta variável pq ele entende que esta variável é um number.
+	
+	
+--------------------------
+Contextual Typing
+--------------------------
+// Contextual Typing --> Ele sabe que espera um MouseEvent, então ele mesmo deduz.
+// Caso 1
+window.onmousedown = function (this, evento){
+    console.log(evento.button);
+    
+    // Abaixo dá erro pois ele sabe que no MouseEvent não existe esta propriedade
+    //console.log(evento.buton);
+}
+
+// Caso 2
+//-- Neste caso, deixamos explícito que o evento pode ser de qq tipo
+window.onmousedown = function (this, evento: any){
+    // Neste caso ele aceita as duas linhas, pois ele não sabe o tipo do evento
+    // e se não sabe, pode ter os dois atributos, por isso não dá erro de compilacao
+    console.log(evento.button);
+    console.log(evento.buton);
+}	
